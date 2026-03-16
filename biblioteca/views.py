@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 
 # ===========================================================
-# EJERCICIO 2 — Vista libros_por_autor (10 puntos)
+# EJERCICIO 2 - Vista libros_por_autor (10 puntos)
 # ===========================================================
 # TODO: Importa los modelos necesarios y completa la vista:
 #   - Recibe request y autor_id
@@ -16,7 +16,7 @@ def libros_por_autor(request, autor_id):
 
 
 # ===========================================================
-# EJERCICIO 3c — Vista crear_libro (7 puntos)
+# EJERCICIO 3c - Vista crear_libro (7 puntos)
 # ===========================================================
 # TODO: Completa la vista:
 #   - GET: muestra formulario vacío

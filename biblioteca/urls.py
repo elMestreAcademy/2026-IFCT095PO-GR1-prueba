@@ -4,7 +4,7 @@ from . import views
 app_name = 'biblioteca'
 
 # ===========================================================
-# EJERCICIO 2b — URL (3 puntos)
+# EJERCICIO 2b - URL (3 puntos)
 # ===========================================================
 # TODO: Añade la ruta que mapee:
 #   autor/<int:autor_id>/libros/ → libros_por_autor

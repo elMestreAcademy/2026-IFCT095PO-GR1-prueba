@@ -2,7 +2,7 @@ from django import forms
 
 
 # ===========================================================
-# EJERCICIO 3a+3b — LibroForm con validación cruzada (13 puntos)
+# EJERCICIO 3a+3b - LibroForm con validación cruzada (13 puntos)
 # ===========================================================
 # TODO:
 #   a) Crea un ModelForm para Libro con campos:

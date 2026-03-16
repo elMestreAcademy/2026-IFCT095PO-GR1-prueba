@@ -1,4 +1,4 @@
-# Examen práctico — IFCT095PO · Python y Django
+# Examen práctico - IFCT095PO · Python y Django
 
 ## Instrucciones para el alumno
 

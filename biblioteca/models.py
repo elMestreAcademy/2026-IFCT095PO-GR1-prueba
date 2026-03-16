@@ -2,7 +2,7 @@ from django.db import models
 
 
 # ===========================================================
-# EJERCICIO 1 — Modelos Autor y Libro (20 puntos)
+# EJERCICIO 1 - Modelos Autor y Libro (20 puntos)
 # ===========================================================
 # TODO: Define dos modelos:
 #
