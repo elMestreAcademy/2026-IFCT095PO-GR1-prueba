@@ -1,4 +1,5 @@
 from django.urls import path
+
 from . import views
 
 app_name = 'biblioteca'
@@ -16,4 +17,5 @@ app_name = 'biblioteca'
 
 urlpatterns = [
     # TU CÓDIGO AQUÍ
+    path(" autor/<int:autor_id>/libros/", views.libros_por_autor, name="Libros por autor")
 ]

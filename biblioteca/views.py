@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 
+from .models import Autor, Libro
 
 # ===========================================================
 # EJERCICIO 2 - Vista libros_por_autor (10 puntos)
@@ -12,7 +13,18 @@ from django.shortcuts import render, get_object_or_404, redirect
 # ===========================================================
 
 def libros_por_autor(request, autor_id):
-    pass  # ← TU CÓDIGO AQUÍ
+    autor = get_object_or_404(Autor, pk=autor_id)
+    libros = Libro.objects.filter(autor_id = autor_id)
+    # libros = Libro.objects.filter(autor_id = autor_id, publicado_isnull = False)
+
+    return render(
+        request,
+        "biblioteca/por_autor.html",
+        {
+            "autor": autor,
+            "libros": libros,
+        },
+    )
 
 
 # ===========================================================
