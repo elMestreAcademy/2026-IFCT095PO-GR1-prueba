@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{# Template ya dado para crear_libro #}
+{% block title %}Nuevo libro{% endblock %}
+
+{% block content %}
+<h1>Nuevo libro</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+{% endblock %}
