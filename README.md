@@ -20,7 +20,16 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
-### 3. Completar los TODO
+### 3. Admin
+
+Existe un usuario de admin
+
+```bash
+    user: admin
+    pass: 1234
+```
+
+### 4. Completar los TODO
 
 Edita **únicamente** los siguientes archivos (busca las marcas `TODO`):
 
@@ -35,7 +44,7 @@ Edita **únicamente** los siguientes archivos (busca las marcas `TODO`):
 
 **Total: 60 puntos (parte práctica)**
 
-### 4. Comprobar que funciona
+### 5. Comprobar que funciona
 
 ```bash
 python manage.py runserver
@@ -47,3 +56,4 @@ Visita en el navegador:
 
 > El proyecto debe arrancar **sin errores** antes y después de tus cambios.
 > Usa `python manage.py check` para comprobarlo rápidamente.
+
