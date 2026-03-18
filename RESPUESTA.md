@@ -1,97 +1,43 @@
 # Respuestas
 
-### Alumno/a: Carlos Mestre
-### DNI: 12345678Z
+### Alumno/a:
+### DNI:
 
 ## Tipo Test
 
-| Pregunta  | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   |
-| ---       | --- | --- | --- | --- | --- | --- | --- | --- |
-| Respuesta | b   | b   | a   | b   |     |     |     |     |
+
+| Pregunta  | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  |
+| ---       | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Respuesta |     |     |     |     |     |     |     |     |     |     |
 
 ## Supuesto práctico
 
-**Ejercicio 1:**
+
+**Ejercicio 1 — Modelo Resena + admin (models.py y admin.py):**
 
 ```python
-
-# biblioteca/models.py
-
-class Autor(models.Model):
-    nombre = models.CharField(max_length=150)
-    email = models.EmailField(max_length=150, unique=True)
-    activeo = models.BooleanField(default=True)
-
-class Libro(models.Model):
-    titulo = models.CharField(max_length=300)
-    autor = models.(Autor, on_delete=models.SET_NULL)
-    precio = models.DecimalField(max_digits=8, decimal_places=2)
-    publicado = models.DateTimeField()
-    # Autores secundarios, de momento en blanco que es la chunga (xa 10)
-
-    def precio_con_iva(self):
-        return float(self.precio) * 1.21
+## Código aquí
 ```
 
-**Ejercicio 2a:**
+**Ejercicio 2a — URL (urls.py):**
 
 ```python
-# biblioteca/views.py
-def libros_por_autor(request, autor_id):
-    autor = get_object_or_404(Autor, pk=autor_id)
-    libros = Libro.objects.filter(autor_id = autor_id)
-    # libros = Libro.objects.filter(autor_id = autor_id, publicado_isnull = False)
-
-    return render(
-        request,
-        "biblioteca/por_autor.html",
-        {
-            "autor": autor,
-            "libros": libros,
-        },
-    )
+## Código aquí
 ```
 
-**Ejercicio 2b:**
+**Ejercicio 2b — Vista resenas_libro (views.py):**
 
 ```python
-# urls.py
-path(" autor/<int:autor_id>/libros/", views.libros_por_autor, name="Libros por autor")
+## Código aquí
 ```
 
-**Ejercicio 2c:**
+**Ejercicio 2c — Template resenas.html:**
 
 ```html
-<!-- por_autor_html -->
-{% block content %}
-
-  {% if libros %}
-
-    {% for libro in libros %}
-      libro.titulo
-      libro.precio_con_iva()
-    {% endfor %}
-
-  {% else %}
-    Este autor no tiene libros publicados.
-  {% endif %}
-
-{% endblock %}
+<!-- Código aquí -->
 ```
 
-**Ejercicio 3a:**
-
-```python
-## Código aquí
-```
-
-**Ejercicio 3b:**
-
-```python
-## Código aquí
-```
-
-**Ejercicio 3c:**
+**Ejercicio 3 — Formulario ResenaForm (forms.py):**
 
 ```python
 ## Código aquí

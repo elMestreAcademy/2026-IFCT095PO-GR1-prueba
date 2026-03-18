@@ -1,41 +1,29 @@
-import decimal
+from decimal import ROUND_HALF_UP, Decimal
 
 from django.db import models
-
-# ===========================================================
-# EJERCICIO 1 - Modelos Autor y Libro (20 puntos)
-# ===========================================================
-# TODO: Define dos modelos:
-#
-# Autor:
-#   - nombre: texto, máximo 150 caracteres
-#   - email: email, único
-#   - activo: booleano, por defecto True
-#
-# Libro:
-#   - titulo: texto, máximo 300 caracteres
-#   - autor: FK a Autor (SET_NULL si se borra, permite null)
-#   - precio: decimal, 8 dígitos, 2 decimales
-#   - publicado: fecha, puede estar vacía/nula
-#   - autores_secundarios: M2M con Autor (puede estar vacía)
-#
-# Añade a Libro un método precio_con_iva() que devuelva
-# precio * 1.21, redondeado a 2 decimales.
-# ===========================================================
 
 class Autor(models.Model):
     nombre = models.CharField(max_length=150)
     email = models.EmailField(max_length=150, unique=True)
     activo = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.nombre
+
+
 class Libro(models.Model):
     titulo = models.CharField(max_length=300)
-    autor = models.ForeignKey(Autor, on_delete=models.SET_NULL, null=True)
+    autor = models.ForeignKey(Autor, on_delete=models.SET_NULL, null=True, blank=True)
     precio = models.DecimalField(max_digits=8, decimal_places=2)
-    publicado = models.DateTimeField()
-    # Autores secundarios, de momento en blanco que es la chunga (xa 10)
+    publicado = models.DateField(null=True, blank=True)
+    autores_secundarios = models.ManyToManyField(
+        Autor, related_name='libros_secundarios', blank=True
+    )
 
     def precio_con_iva(self):
-        return float(self.precio) * 1.21
-        # return round(float(self.precio) * 1.21 ,2)
-        # return self.precio * decimal.Decimal('1.21')
+        return (self.precio * Decimal('1.21')).quantize(
+            Decimal('0.01'), rounding=ROUND_HALF_UP
+        )
+
+    def __str__(self):
+        return self.titulo

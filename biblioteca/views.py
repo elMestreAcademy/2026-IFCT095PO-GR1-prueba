@@ -1,41 +1,37 @@
 from django.shortcuts import get_object_or_404, redirect, render
 
+from .forms import LibroForm
 from .models import Autor, Libro
 
-# ===========================================================
-# EJERCICIO 2 - Vista libros_por_autor (10 puntos)
-# ===========================================================
-# TODO: Importa los modelos necesarios y completa la vista:
-#   - Recibe request y autor_id
-#   - Obtiene el Autor o 404
-#   - Filtra libros de ese autor con publicado no nulo
-#   - Renderiza 'biblioteca/por_autor.html' con autor y libros
-# ===========================================================
+
+def lista_libros(request):
+    libros = Libro.objects.select_related('autor').order_by('titulo')
+    return render(request, 'biblioteca/lista_libros.html', {'libros': libros})
+
+
+def detalle_libro(request, libro_id):
+    libro = get_object_or_404(Libro.objects.select_related('autor').prefetch_related('autores_secundarios'), pk=libro_id)
+    return render(request, 'biblioteca/detalle_libro.html', {'libro': libro})
+
 
 def libros_por_autor(request, autor_id):
     autor = get_object_or_404(Autor, pk=autor_id)
-    libros = Libro.objects.filter(autor_id = autor_id)
-    # libros = Libro.objects.filter(autor_id = autor_id, publicado_isnull = False)
-
+    libros = Libro.objects.filter(autor=autor, publicado__isnull=False)
     return render(
         request,
-        "biblioteca/por_autor.html",
+        'biblioteca/por_autor.html',
         {
-            "autor": autor,
-            "libros": libros,
+            'autor': autor,
+            'libros': libros,
         },
     )
 
-
-# ===========================================================
-# EJERCICIO 3c - Vista crear_libro (7 puntos)
-# ===========================================================
-# TODO: Completa la vista:
-#   - GET: muestra formulario vacío
-#   - POST: valida, si ok guarda y redirige a libros-por-autor
-#     del autor correspondiente; si no, muestra errores
-#   - Template: 'biblioteca/crear.html'
-# ===========================================================
-
 def crear_libro(request):
-    pass  # ← TU CÓDIGO AQUÍ
+    if request.method == 'POST':
+        form = LibroForm(request.POST)
+        if form.is_valid():
+            libro = form.save()
+            return redirect('biblioteca:libros-por-autor', autor_id=libro.autor_id)
+    else:
+        form = LibroForm()
+    return render(request, 'biblioteca/crear.html', {'form': form})

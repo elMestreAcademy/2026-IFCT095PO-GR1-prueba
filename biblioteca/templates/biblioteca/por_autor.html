@@ -9,19 +9,18 @@
    - Si no hay libros: "Este autor no tiene libros publicados."
    ========================================================= #}
 
-<h1>{% block title %}Libros de {{ autor.nombre }}{% endblock %}</h1>
+{% block title %}Libros de {{ autor.nombre }}{% endblock %}
 
 {% block content %}
+<h1>{{ autor.nombre }}</h1>
 
-  {% if libros %}
-
+{% if libros %}
+  <ul>
     {% for libro in libros %}
-      libro.titulo
-      libro.precio_con_iva()
+      <li>{{ libro.titulo }} &mdash; {{ libro.precio_con_iva }} &euro;</li>
     {% endfor %}
-
-  {% else %}
-    Este autor no tiene libros publicados.
-  {% endif %}
-
+  </ul>
+{% else %}
+  <p>Este autor no tiene libros publicados.</p>
+{% endif %}
 {% endblock %}

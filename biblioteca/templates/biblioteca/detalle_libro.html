@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}{{ libro.titulo }}{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="mb-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'biblioteca:lista-libros' %}">Libros</a></li>
+    {% if libro.autor %}
+    <li class="breadcrumb-item">
+      <a href="{% url 'biblioteca:libros-por-autor' libro.autor.pk %}">{{ libro.autor }}</a>
+    </li>
+    {% endif %}
+    <li class="breadcrumb-item active">{{ libro.titulo }}</li>
+  </ol>
+</nav>
+
+<h1>{{ libro.titulo }}</h1>
+
+<table class="table table-borderless w-auto mt-3">
+  <tr>
+    <th class="pe-4">Autor</th>
+    <td>
+      {% if libro.autor %}
+        <a href="{% url 'biblioteca:libros-por-autor' libro.autor.pk %}">{{ libro.autor }}</a>
+      {% else %}
+        <span class="text-muted">—</span>
+      {% endif %}
+    </td>
+  </tr>
+  <tr>
+    <th>Precio</th>
+    <td>{{ libro.precio }} €</td>
+  </tr>
+  <tr>
+    <th>Precio con IVA</th>
+    <td>{{ libro.precio_con_iva }} €</td>
+  </tr>
+  <tr>
+    <th>Publicado</th>
+    <td>
+      {% if libro.publicado %}
+        {{ libro.publicado }}
+      {% else %}
+        <span class="text-muted">Sin publicar</span>
+      {% endif %}
+    </td>
+  </tr>
+  {% if libro.autores_secundarios.all %}
+  <tr>
+    <th>Autores secundarios</th>
+    <td>
+      {% for a in libro.autores_secundarios.all %}
+        <a href="{% url 'biblioteca:libros-por-autor' a.pk %}">{{ a }}</a>{% if not forloop.last %}, {% endif %}
+      {% endfor %}
+    </td>
+  </tr>
+  {% endif %}
+</table>
+
+<a href="{% url 'biblioteca:lista-libros' %}" class="btn btn-secondary mt-2">&larr; Volver</a>
+{% endblock %}

@@ -1,13 +1,18 @@
 from django import forms
 
+from .models import Libro
 
-# ===========================================================
-# EJERCICIO 3a+3b - LibroForm con validación cruzada (13 puntos)
-# ===========================================================
-# TODO:
-#   a) Crea un ModelForm para Libro con campos:
-#      titulo, precio, publicado, autor
-#   b) En clean(): si publicado tiene fecha y precio == 0,
-#      lanza ValidationError:
-#      "Un libro publicado debe tener precio mayor que 0."
-# ===========================================================
+class LibroForm(forms.ModelForm):
+    class Meta:
+        model = Libro
+        fields = ['titulo', 'precio', 'publicado', 'autor']
+
+    def clean(self):
+        cleaned = super().clean()
+        publicado = cleaned.get('publicado')
+        precio = cleaned.get('precio')
+        if publicado and precio is not None and precio == 0:
+            raise forms.ValidationError(
+                'Un libro publicado debe tener precio mayor que 0.'
+            )
+        return cleaned

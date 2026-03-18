@@ -24,15 +24,16 @@ python manage.py migrate
 
 Edita **únicamente** los siguientes archivos (busca las marcas `TODO`):
 
-| Archivo                                          | Ejercicio                                 | Puntos |
-| ------------------------------------------------ | ----------------------------------------- | ------ |
-| `biblioteca/models.py`                           | Modelos `Autor` y `Libro`                 | 20     |
-| `biblioteca/views.py`                            | Vistas `libros_por_autor` y `crear_libro` | 17     |
-| `biblioteca/forms.py`                            | `LibroForm` con validación cruzada        | 13     |
-| `biblioteca/urls.py`                             | Rutas de la app biblioteca                | 3      |
-| `biblioteca/templates/biblioteca/por_autor.html` | Template por autor                        | 7      |
+| Archivo                                          | Ejercicio                                         | Puntos |
+| ------------------------------------------------ | ------------------------------------------------- | ------ |
+| `biblioteca/models.py`                           | Modelo `Resena` + registro en admin               | 20     |
+| `biblioteca/admin.py`                            | Registrar `Resena` en el panel de administración   | (incl) |
+| `biblioteca/urls.py`                             | Ruta `libro/<int:libro_id>/resenas/`               | 3      |
+| `biblioteca/views.py`                            | Vista `resenas_libro`                              | 10     |
+| `biblioteca/templates/biblioteca/resenas.html`   | Template de reseñas de un libro                    | 7      |
+| `biblioteca/forms.py`                            | `ResenaForm` con validaciones personalizadas       | 20     |
 
-**Total: 120 puntos**
+**Total: 60 puntos (parte práctica)**
 
 ### 4. Comprobar que funciona
 
@@ -42,7 +43,7 @@ python manage.py runserver
 
 Visita en el navegador:
 
-- http://127.0.0.1:8000/biblioteca/autor/1/libros/
+- http://127.0.0.1:8000/libro/1/resenas/
 
 > El proyecto debe arrancar **sin errores** antes y después de tus cambios.
 > Usa `python manage.py check` para comprobarlo rápidamente.
